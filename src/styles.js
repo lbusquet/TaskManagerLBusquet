@@ -3,10 +3,11 @@ import { StyleSheet, StatusBar } from "react-native";
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: "#fefae0",
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fefae0",
     marginHorizontal: 20,
     paddingTop: StatusBar.currentHeight,
   },

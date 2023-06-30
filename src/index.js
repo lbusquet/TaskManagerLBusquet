@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { InputTask, TaskItem } from "./components";
 import { styles } from "./styles";
 
 export default function App() {
@@ -55,37 +56,19 @@ export default function App() {
     setIsVisible(false);
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => onHandlerModal(item)} style={styles.containerItem}>
-      <Text style={styles.listItem}>{item.value}</Text>
-      <Text style={styles.icon}>X</Text>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }) => <TaskItem item={item} onPressItem={onHandlerModal} />;
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[styles.input, { borderColor }]}
-            placeholder="add new tasks"
-            autoCapitalize="none"
-            autoCorrect={false}
-            cursorColor="#424D9E"
-            selectionColor="#D4D7ED"
-            placeholderTextColor="#C5C9E7"
-            onFocus={onHandlerFocus}
-            onBlur={onHandlerBlur}
-            onChangeText={onHandlerChangeText}
-            value={task}
-          />
-          <Button
-            disabled={task.length === 0}
-            title="Create"
-            color="#424D9E"
-            onPress={onHandlerCreateTask}
-          />
-        </View>
+        <InputTask
+          borderColor={borderColor}
+          onHandlerBlur={onHandlerBlur}
+          onHandlerChangeText={onHandlerChangeText}
+          onHandlerCreateTask={onHandlerCreateTask}
+          onHandlerFocus={onHandlerFocus}
+          task={task}
+        />
         <FlatList
           data={tasks}
           renderItem={renderItem}
@@ -103,8 +86,8 @@ export default function App() {
             <Text style={styles.selectedTask}>{selectedTask?.value}</Text>
           </View>
           <View style={styles.modalButtonContainer}>
-            <Button title="Cancel" color="#424D9E" onPress={() => setIsVisible(false)} />
-            <Button title="Delete" color="red" onPress={() => onHandleDelete(selectedTask?.id)} />
+            <Button title="Cancelar" color="#424D9E" onPress={() => setIsVisible(false)} />
+            <Button title="Borrar" color="red" onPress={() => onHandleDelete(selectedTask?.id)} />
           </View>
         </View>
       </Modal>
